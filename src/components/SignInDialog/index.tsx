@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateEmail } from '../../utils';
 import { DialogOverlay, DialogContainer, Title, DialogInput, CreateButton, CancelButton, Header, Footer } from './styles';
 
 interface SignInDialogProps {
@@ -19,6 +20,11 @@ const SignInDialog: React.FC<SignInDialogProps> = ({ open, onClose, onCreate }) 
     onClose();
   };
 
+  const handleChangeEmail = (email: string) => {
+    setEmail(email);
+    setIsValid(validateEmail(email));
+  };
+
   return (
     <DialogOverlay open={open}>
       <DialogContainer>
@@ -30,7 +36,8 @@ const SignInDialog: React.FC<SignInDialogProps> = ({ open, onClose, onCreate }) 
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => handleChangeEmail(e.target.value)}
+          className = {isValid ? "" : "invalid"}
         />
         <DialogInput
           type="password"

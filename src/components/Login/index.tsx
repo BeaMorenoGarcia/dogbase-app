@@ -60,7 +60,6 @@ function Login() {
             value={email}
             onChange={(e) => handleChangeEmail(e.target.value)}
             className = {isValid ? "" : "invalid"}
-            style={{ borderColor: isValid ? "transparent" : "red" }}
           />
           <LoginInput
             type="password"

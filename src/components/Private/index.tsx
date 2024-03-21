@@ -38,7 +38,6 @@ function Private() {
         `https://api.thedogapi.com/v1/breeds?limit=${itemsPerPage}&page=${page}`
       );
       setData(response.data);
-      console.log(response.data);
       const totalItems = response.headers["pagination-count"];
       setTotalPages(Math.trunc(totalItems / itemsPerPage));
     } catch (error) {
@@ -50,8 +49,10 @@ function Private() {
   const handlePreviousPage = () => setCurrentPage(currentPage - 1);
   const handleNextPage = () => setCurrentPage(currentPage + 1);
   const handleLastPage = () => setCurrentPage(totalPages);
-  const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
+  const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentPage(1);
     setItemsPerPage(parseInt(e.target.value));
+  }
 
   const handleLogout = () => {
     dispatch(logout()).then(() => {
@@ -60,7 +61,6 @@ function Private() {
   };
 
   const toggleDropdown = () => {
-    console.log(isDropdownOpen, 'se hizo click')
     setIsDropdownOpen(!isDropdownOpen);
   };
 
